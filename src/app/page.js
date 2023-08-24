@@ -128,8 +128,6 @@ export default function Home() {
   // },[])
 
   return (
-  typeof window != "undefined" &&
-
     // <main>
     //   <Header />
     //   <div className="adminPanel">
