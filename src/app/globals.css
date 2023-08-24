@@ -101,6 +101,18 @@ button
 {
   display: block;
 }
+.logoBackgr
+{
+  width: 60%;
+  margin-left: 20%;
+  padding-top: 10%;
+}
+.mobileMain
+{
+  background-image: url("../../public/lightBackgr.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+}
 /*********Administration button*********/
 .adminPanel
 {
@@ -156,6 +168,39 @@ button
 }
 
 @media (max-width: 500px) {
+  .adminPanel
+  {
+    margin-top: 15%;
+    display: block;
+  }
+  #ID
+  {
+    margin-left: 15%;
+  }
+  .column{
+    padding-left: 5%;
+    width: 80%;
+    margin: 5% 5%;
+  }
+  input, select
+  {
+    width: 100%;
+    margin-left: 0%;
+  }
+  p
+  {
+    margin-left: 3%;
+  }
+  .column h2
+  {
+    text-align: center;
+  }
+  .adminButton
+  {
+    width: 70%;
+    margin: 2% 15%;
+    margin-bottom: 10%;
+  }
   .DesktopHeader{
     display: none;
   }

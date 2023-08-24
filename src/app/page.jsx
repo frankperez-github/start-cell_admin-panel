@@ -15,6 +15,17 @@ export default function Home() {
   const [id, setId] = useState("")
   const [updateID, setUpdateID] = useState("")
   const [progress, setProgress] = useState(0)
+  const [file, setFile] = useState("")
+  const [imageURL, setImageURL] = useState("")
+
+  useEffect(()=>
+  {
+    setNewProduct((prevState)=>({
+      ...prevState,
+      "image": [imageURL]
+    }))
+    console.log(newProduct.image)
+  }, [imageURL])
 
   const [newClient, setNewClient] = useState({
     "name": "",
@@ -73,13 +84,17 @@ export default function Home() {
   const onSubmitProd=async(e)=>
   {
     e.preventDefault()
-    updloadFile(document.getElementById("prodImage").value)
-    // newProduct.button_color = products.length%2 === 0 ? "#04BA56" : "#0495BA"
-    // const clientsRef = doc(db, 'products', id)
-    // await setDoc(clientsRef, newProduct)
-    // .then(()=>alert("Producto "+id+" agregado. Id copiado al portapapeles"))
-    // navigator.clipboard.writeText(id)
-    // location.reload()
+    updloadFile(file)
+    newProduct.button_color = products.length%2 === 0 ? "#04BA56" : "#0495BA"
+    
+    const clientsRef = doc(db, 'products', id)
+    if(newProduct.image != "")
+    {
+      await setDoc(clientsRef, newProduct)
+      .then(()=>alert("Producto "+id+" agregado. Id copiado al portapapeles"))
+      navigator.clipboard.writeText(id)
+      location.reload()
+    }
   }
 
   const handleDelete=async(e)=>
@@ -106,6 +121,11 @@ export default function Home() {
     )
   }
 
+  const handleFile=(e)=>
+  {
+    setFile(e.target.files[0])
+  }
+
   const updloadFile=(file)=>
   {
     if(!file) return;
@@ -118,9 +138,8 @@ export default function Home() {
         setProgress(progr)
       }
     ),
-    ()=>{
-      getDownloadURL(uploadTask.snapshot.ref).then((url)=>console.log(url))
-    }
+      getDownloadURL(uploadTask.snapshot.ref)
+      .then((url)=>setImageURL(url))
   }
   
   useEffect(()=>
@@ -131,6 +150,11 @@ export default function Home() {
   return (
     <main>
       <Header />
+      <div className="MobileView mobileMain">
+        <div className="logoBackgr">
+          <Image alt="" src="/Logo.svg" fill className='image'/>
+        </div>
+      </div>
       <div className="adminPanel">
         <div className="column">
           <h2>Nuevo Cliente</h2> <p id="ID">{id} <span style={{color:"gray", fontWeight:"bold", cursor:"pointer", border:"solid", padding:"0.2%", borderWidth:"2px"}} onClick={()=>(navigator.clipboard.writeText(id),alert("Id copiado al portapapeles"))}>COPIAR</span></p>
@@ -201,7 +225,7 @@ export default function Home() {
             <input required type="text" name="description" id="description" onChange={onChangeProd}/>
 
             <p>Imagen</p>
-            <input type="file" accept='image/*' name="" id="prodImage" />
+            <input type="file" accept='image/*' name="" id="prodImage" onChange={handleFile}/>
             <h3>{progress}%</h3>
             <button className='primaryButton adminButton' onClick={onSubmitProd}>Añadir Producto</button>
           </form>
