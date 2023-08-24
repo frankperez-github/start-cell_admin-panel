@@ -10,7 +10,7 @@ import { collection, setDoc, doc, deleteDoc, updateDoc, getDoc } from 'firebase/
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 
 export default function Home() {
-
+  typeof window != "undefined" &&
   // const {locations, clients, products} = useSiteContext()
   // const [id, setId] = useState("")
   // const [updateID, setUpdateID] = useState("")
