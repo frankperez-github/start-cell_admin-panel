@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react"
-import {db} from "@/app/firebase.config"
-import {getDocs, collection } from "firebase/firestore"
 
 export default function useSiteContext()
 {
