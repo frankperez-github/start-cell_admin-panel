@@ -4,10 +4,11 @@ import styles from './page.module.css'
 import Header from './components/Header'
 import {v4 as uuidv4} from 'uuid'
 import { useEffect, useState } from 'react'
+import useSiteContext from '@/Hooks/useSiteContext'
 
 export default function Home() {
 
-  const {locations, clients, products} = {}
+  const {locations, clients, products} = useSiteContext()
   const [id, setId] = useState("")
   const [updateID, setUpdateID] = useState("")
   const [progress, setProgress] = useState(0)
