@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react'
 
 export default function Home() {
 
-  // const {locations, clients, products} = {}
+  const {locations, clients, products} = {}
   const [id, setId] = useState("")
   const [updateID, setUpdateID] = useState("")
   const [progress, setProgress] = useState(0)
