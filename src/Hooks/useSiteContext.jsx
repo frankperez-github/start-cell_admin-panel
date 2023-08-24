@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import {db} from "@/app/firebase.config.js"
+import {db} from "@/app/firebase.config"
 
 export default function useSiteContext()
 {
