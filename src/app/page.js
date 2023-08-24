@@ -5,6 +5,9 @@ import Header from './components/Header'
 import {v4 as uuidv4} from 'uuid'
 import { useEffect, useState } from 'react'
 import useSiteContext from '@/Hooks/useSiteContext'
+import { db, storage } from './firebase.config'
+import { collection, setDoc, doc, deleteDoc, updateDoc, getDoc } from 'firebase/firestore'
+import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage'
 
 export default function Home() {
 
@@ -70,7 +73,7 @@ export default function Home() {
   const onSubmitProd=async(e)=>
   {
     e.preventDefault()
-    // updloadFile(document.getElementById("prodImage").value)
+    updloadFile(document.getElementById("prodImage").value)
     // newProduct.button_color = products.length%2 === 0 ? "#04BA56" : "#0495BA"
     // const clientsRef = doc(db, 'products', id)
     // await setDoc(clientsRef, newProduct)
