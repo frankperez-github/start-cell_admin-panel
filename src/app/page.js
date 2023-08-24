@@ -7,122 +7,122 @@ import { useEffect, useState } from 'react'
 
 export default function Home() {
 
-  const {locations, clients, products} = {}
+  // const {locations, clients, products} = {}
   const [id, setId] = useState("")
   const [updateID, setUpdateID] = useState("")
   const [progress, setProgress] = useState(0)
 
-  // const [newClient, setNewClient] = useState({
-  //   "name": "",
-  //   "dispositive": "",
-  //   "service": "",
-  //   "in_date": "",
-  //   "status": "",
-  //   "location": "",
-  // })
+  const [newClient, setNewClient] = useState({
+    "name": "",
+    "dispositive": "",
+    "service": "",
+    "in_date": "",
+    "status": "",
+    "location": "",
+  })
 
-  // const [newProduct, setNewProduct] = useState({
-  //   "title": "",
-  //   "description": "",
-  //   "image": "",
-  //   "button_color": ""
-  // })
+  const [newProduct, setNewProduct] = useState({
+    "title": "",
+    "description": "",
+    "image": "",
+    "button_color": ""
+  })
   
-  // const onChangeClient=(e)=>
-  // {
-  //   setNewClient((prevState)=>
-  //   ({
-  //     ...prevState,
-  //     [e.target.id]: [e.target.value],
-  //   }))
-  // }
+  const onChangeClient=(e)=>
+  {
+    setNewClient((prevState)=>
+    ({
+      ...prevState,
+      [e.target.id]: [e.target.value],
+    }))
+  }
 
-  // const onChangeProd=(e)=>
-  // {
-  //   setNewProduct((prevState)=>
-  //   ({
-  //     ...prevState,
-  //     [e.target.id]: [e.target.value],
-  //   }))
-  // }
+  const onChangeProd=(e)=>
+  {
+    setNewProduct((prevState)=>
+    ({
+      ...prevState,
+      [e.target.id]: [e.target.value],
+    }))
+  }
   
-  // const onSubmitClient=async(e)=>
-  // {
-  //   e.preventDefault()
-  //   if(newClient.location!= "")
-  //   {
-  //     const clientsRef = doc(db, 'clients', id)
-  //     await setDoc(clientsRef, newClient)
-  //     .then(()=>
-  //     {
-  //       alert("Cliente "+id+" agregado. Id copiado al portapapeles")
-  //       navigator.clipboard.writeText(id)
-  //       location.reload()
-  //     })
-  //   }
-  //   else
-  //   {
-  //     alert("Debe rellenar la direccion del taller")
-  //   }
-  // }
+  const onSubmitClient=async(e)=>
+  {
+    e.preventDefault()
+    if(newClient.location!= "")
+    {
+      const clientsRef = doc(db, 'clients', id)
+      await setDoc(clientsRef, newClient)
+      .then(()=>
+      {
+        alert("Cliente "+id+" agregado. Id copiado al portapapeles")
+        navigator.clipboard.writeText(id)
+        location.reload()
+      })
+    }
+    else
+    {
+      alert("Debe rellenar la direccion del taller")
+    }
+  }
 
-  // const onSubmitProd=async(e)=>
-  // {
-  //   e.preventDefault()
-  //   updloadFile(document.getElementById("prodImage").value)
-  //   // newProduct.button_color = products.length%2 === 0 ? "#04BA56" : "#0495BA"
-  //   // const clientsRef = doc(db, 'products', id)
-  //   // await setDoc(clientsRef, newProduct)
-  //   // .then(()=>alert("Producto "+id+" agregado. Id copiado al portapapeles"))
-  //   // navigator.clipboard.writeText(id)
-  //   // location.reload()
-  // }
+  const onSubmitProd=async(e)=>
+  {
+    e.preventDefault()
+    // updloadFile(document.getElementById("prodImage").value)
+    // newProduct.button_color = products.length%2 === 0 ? "#04BA56" : "#0495BA"
+    // const clientsRef = doc(db, 'products', id)
+    // await setDoc(clientsRef, newProduct)
+    // .then(()=>alert("Producto "+id+" agregado. Id copiado al portapapeles"))
+    // navigator.clipboard.writeText(id)
+    // location.reload()
+  }
 
-  // const handleDelete=async(e)=>
-  // {
-  //   e.preventDefault()
-  //   const ID = document.getElementById("deleteID").value
-  //   const docum = doc(db, 'clients', ID)
-  //   await deleteDoc(docum)
-  //   .then(()=>
-  //   {
-  //     alert("Cliente "+ID+" eliminado")
-  //     location.reload()
-  //   })
-  // }
+  const handleDelete=async(e)=>
+  {
+    e.preventDefault()
+    const ID = document.getElementById("deleteID").value
+    const docum = doc(db, 'clients', ID)
+    await deleteDoc(docum)
+    .then(()=>
+    {
+      alert("Cliente "+ID+" eliminado")
+      location.reload()
+    })
+  }
 
-  // const handleUpdate=async(e)=>
-  // {
-  //   e.preventDefault()
+  const handleUpdate=async(e)=>
+  {
+    e.preventDefault()
     
-  //   const clientRef = doc(db, 'clients', updateID)
-  //   await updateDoc(clientRef, {"status": document.getElementById("statusUpdt").value})
-  //   .then(
-  //     alert("Estado actualizado")
-  //   )
-  // }
+    const clientRef = doc(db, 'clients', updateID)
+    await updateDoc(clientRef, {"status": document.getElementById("statusUpdt").value})
+    .then(
+      alert("Estado actualizado")
+    )
+  }
 
-  // const updloadFile=(file)=>
-  // {
-  //   if(!file) return;
-  //   const storageRef = ref(storage, `/files/${file.name}`)
-  //   const uploadTask = uploadBytesResumable(storageRef, file)
-  //   uploadTask.on(
-  //     "state_changed",
-  //     (snapshot)=>{
-  //       const progr = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
-  //       setProgress(progr)
-  //     }
-  //   ),
-  //   ()=>{
-  //     getDownloadURL(uploadTask.snapshot.ref).then((url)=>console.log(url))
-  //   }
-  // }
+  const updloadFile=(file)=>
+  {
+    if(!file) return;
+    const storageRef = ref(storage, `/files/${file.name}`)
+    const uploadTask = uploadBytesResumable(storageRef, file)
+    uploadTask.on(
+      "state_changed",
+      (snapshot)=>{
+        const progr = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+        setProgress(progr)
+      }
+    ),
+    ()=>{
+      getDownloadURL(uploadTask.snapshot.ref).then((url)=>console.log(url))
+    }
+  }
   
-  // useEffect(()=>
-  // { 
-  //   setId(uuidv4())
-  // },[])
+  useEffect(()=>
+  { 
+    setId(uuidv4())
+  },[])
 
   return (
     <main>
