@@ -125,98 +125,97 @@ export default function Home() {
   // },[])
 
   return (
-    // <main>
-    //   <Header />
-    //   <div className="adminPanel">
-    //     <div className="column">
-    //       <h2>Nuevo Cliente</h2> <p id="ID">{id} <span style={{color:"gray", fontWeight:"bold", cursor:"pointer", border:"solid", padding:"0.2%", borderWidth:"2px"}} onClick={()=>(navigator.clipboard.writeText(id),alert("Id copiado al portapapeles"))}>COPIAR</span></p>
-    //       <h3>Detalles:</h3>
-    //       <form action="">
-    //         <p>Nombre:</p>
-    //         <input required type="text" name="name" id="name" onChange={onChangeClient}/>
+    <main>
+      <Header />
+      <div className="adminPanel">
+        <div className="column">
+          <h2>Nuevo Cliente</h2> <p id="ID">{id} <span style={{color:"gray", fontWeight:"bold", cursor:"pointer", border:"solid", padding:"0.2%", borderWidth:"2px"}} onClick={()=>(navigator.clipboard.writeText(id),alert("Id copiado al portapapeles"))}>COPIAR</span></p>
+          <h3>Detalles:</h3>
+          <form action="">
+            <p>Nombre:</p>
+            <input required type="text" name="name" id="name" onChange={onChangeClient}/>
 
-    //         <p>Dispositivo:</p>
-    //         <input required type="text" name="dispositive" id="dispositive" onChange={onChangeClient}/>
+            <p>Dispositivo:</p>
+            <input required type="text" name="dispositive" id="dispositive" onChange={onChangeClient}/>
 
-    //         <p>Servicio:</p>
-    //         <input required type="text" name="service" id="service" onChange={onChangeClient}/>
+            <p>Servicio:</p>
+            <input required type="text" name="service" id="service" onChange={onChangeClient}/>
             
-    //         <p>Fecha de entrada al taller:</p>
-    //         <input required type="date" name="in_date" id="in_date" onChange={onChangeClient}/>
+            <p>Fecha de entrada al taller:</p>
+            <input required type="date" name="in_date" id="in_date" onChange={onChangeClient}/>
 
-    //         <p>Estado</p>
-    //         <select name="" id="status" onChange={onChangeClient}>
-    //           <option value=""></option>
-    //           <option value="working">En proceso</option>
-    //         </select>
+            <p>Estado</p>
+            <select name="" id="status" onChange={onChangeClient}>
+              <option value=""></option>
+              <option value="working">En proceso</option>
+            </select>
 
-    //         <p>Taller:</p>
-    //         <select name="location" id="location" onChange={onChangeClient}>
-    //           <option value=""></option>
-    //           {locations.map((location, index)=>
-    //           (
-    //             <option key={index} value={location.id}>{location.id}. {location.address}</option>
-    //           ))}
-    //         </select>
-    //         <br />
-    //         <button className='primaryButton adminButton' onClick={onSubmitClient}>Añadir Cliente</button>
-    //       </form>
-    //     </div>
-    //     <div className="column">
-    //       <h2>Estado de Reparación</h2>
-    //       <form action="">
-    //         <div className="line">
-    //           <div className="left">
-    //             <p>ID Cliente</p>
-    //             <select name="ID" id="idUpdt" onChange={()=>setUpdateID(document.getElementById("idUpdt").value)}>
-    //               <option value=""></option>
-    //               {clients.map((client, index)=>
-    //               (
-    //                 <option key={index} value={client.id}>{client.id}</option>
-    //               ))}
-    //             </select>
-    //           </div>
-    //           <div className="right">
-    //             <p>Estado</p>
-    //             <select name="status" id="statusUpdt">
-    //               <option value="working">En proceso</option>
-    //               <option value="ready">Listo para recoger</option>
-    //             </select>
-    //           </div>
-    //         </div>
-    //         <br />
-    //         <button className='primaryButton adminButton' onClick={handleUpdate}>Actualizar</button>
-    //       </form>
+            <p>Taller:</p>
+            <select name="location" id="location" onChange={onChangeClient}>
+              <option value=""></option>
+              {locations.map((location, index)=>
+              (
+                <option key={index} value={location.id}>{location.id}. {location.address}</option>
+              ))}
+            </select>
+            <br />
+            <button className='primaryButton adminButton' onClick={onSubmitClient}>Añadir Cliente</button>
+          </form>
+        </div>
+        <div className="column">
+          <h2>Estado de Reparación</h2>
+          <form action="">
+            <div className="line">
+              <div className="left">
+                <p>ID Cliente</p>
+                <select name="ID" id="idUpdt" onChange={()=>setUpdateID(document.getElementById("idUpdt").value)}>
+                  <option value=""></option>
+                  {clients.map((client, index)=>
+                  (
+                    <option key={index} value={client.id}>{client.id}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="right">
+                <p>Estado</p>
+                <select name="status" id="statusUpdt">
+                  <option value="working">En proceso</option>
+                  <option value="ready">Listo para recoger</option>
+                </select>
+              </div>
+            </div>
+            <br />
+            <button className='primaryButton adminButton' onClick={handleUpdate}>Actualizar</button>
+          </form>
 
-    //       <h2>Añadir Producto</h2>
-    //       <form action="">
-    //         <p>Nombre del producto</p>
-    //         <input required type="text" name="title" id="title" onChange={onChangeProd}/>
+          <h2>Añadir Producto</h2>
+          <form action="">
+            <p>Nombre del producto</p>
+            <input required type="text" name="title" id="title" onChange={onChangeProd}/>
 
-    //         <p>Descripción</p>
-    //         <input required type="text" name="description" id="description" onChange={onChangeProd}/>
+            <p>Descripción</p>
+            <input required type="text" name="description" id="description" onChange={onChangeProd}/>
 
-    //         <p>Imagen</p>
-    //         <input type="file" accept='image/*' name="" id="prodImage" />
-    //         <h3>{progress}%</h3>
-    //         <button className='primaryButton adminButton' onClick={onSubmitProd}>Añadir Producto</button>
-    //       </form>
-    //     </div>
-    //     <div className="column">
-    //       <h2>Eliminar Cliente</h2>
-    //       <form action="">
-    //         <select name="" id="deleteID">
-    //           {clients.map((client, index)=>
-    //           (
-    //             <option key={index} value={client.id}>{client.id}</option>
-    //           ))}
-    //         </select>
-    //         <br />
-    //         <button className='primaryButton adminButton' onClick={handleDelete}>Eliminar Cliente</button>
-    //       </form>
-    //     </div>
-    //   </div>
-    // </main>
-    <></>
+            <p>Imagen</p>
+            <input type="file" accept='image/*' name="" id="prodImage" />
+            <h3>{progress}%</h3>
+            <button className='primaryButton adminButton' onClick={onSubmitProd}>Añadir Producto</button>
+          </form>
+        </div>
+        <div className="column">
+          <h2>Eliminar Cliente</h2>
+          <form action="">
+            <select name="" id="deleteID">
+              {clients.map((client, index)=>
+              (
+                <option key={index} value={client.id}>{client.id}</option>
+              ))}
+            </select>
+            <br />
+            <button className='primaryButton adminButton' onClick={handleDelete}>Eliminar Cliente</button>
+          </form>
+        </div>
+      </div>
+    </main>
     )
 }
