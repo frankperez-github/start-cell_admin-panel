@@ -2,9 +2,9 @@ import { useEffect, useState } from "react"
 
 export default function useSiteContext()
 {
-    // const [products, setProducts] = useState([])
-    // const [clients, setClients] = useState([])
-    // const [locations, setLocations] = useState([])
+    const [products, setProducts] = useState([])
+    const [clients, setClients] = useState([])
+    const [locations, setLocations] = useState([])
 
     // const fetchInfo = async()=>{
     //     const productsRef = collection(db, 'products')
@@ -38,5 +38,5 @@ export default function useSiteContext()
     //     fetchInfo()
     // }, [])
     
-    return {}
+    return {products, clients, locations}
 }
