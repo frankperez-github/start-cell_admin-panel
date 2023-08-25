@@ -16,6 +16,7 @@ export default function Home() {
   const [updateID, setUpdateID] = useState("")
   const [progress, setProgress] = useState(0)
   const [imageURL, setImageURL] = useState("")
+  const [disabled, setDisabled] = useState(true)
 
 
   const [newClient, setNewClient] = useState({
@@ -132,6 +133,7 @@ export default function Home() {
             .then((url)=>{
               setImageURL(url)
             })
+            setDisabled(false)
           }
         }
       )
@@ -227,7 +229,7 @@ export default function Home() {
             <p>Imagen</p>
             <input type="file" accept='image/*' name="" id="image" onChange={handleFile}/>
             <h3>{progress}%</h3>
-            <button className='primaryButton adminButton' onClick={onSubmitProd}>Añadir Producto</button>
+            <button className='primaryButton adminButton' disabled={disabled} onClick={onSubmitProd}>Añadir Producto</button>
           </form>
         </div>
         <div className="column">
