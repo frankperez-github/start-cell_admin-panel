@@ -15,17 +15,8 @@ export default function Home() {
   const [id, setId] = useState("")
   const [updateID, setUpdateID] = useState("")
   const [progress, setProgress] = useState(0)
-  const [file, setFile] = useState("")
   const [imageURL, setImageURL] = useState("")
 
-  useEffect(()=>
-  {
-    setNewProduct((prevState)=>({
-      ...prevState,
-      "image": [imageURL]
-    }))
-    console.log(newProduct.image)
-  }, [imageURL])
 
   const [newClient, setNewClient] = useState({
     "name": "",
@@ -84,17 +75,14 @@ export default function Home() {
   const onSubmitProd=async(e)=>
   {
     e.preventDefault()
-    updloadFile(file)
     newProduct.button_color = products.length%2 === 0 ? "#04BA56" : "#0495BA"
-    
+    newProduct.image = imageURL
+    console.log(newProduct)
     const clientsRef = doc(db, 'products', id)
-    if(newProduct.image != "")
-    {
-      await setDoc(clientsRef, newProduct)
-      .then(()=>alert("Producto "+id+" agregado. Id copiado al portapapeles"))
-      navigator.clipboard.writeText(id)
-      location.reload()
-    }
+    await setDoc(clientsRef, newProduct)
+    .then(()=>alert("Producto "+id+" agregado. Id copiado al portapapeles"))
+    navigator.clipboard.writeText(id)
+    location.reload()
   }
 
   const handleDelete=async(e)=>
@@ -123,23 +111,35 @@ export default function Home() {
 
   const handleFile=(e)=>
   {
-    setFile(e.target.files[0])
+    updloadFile(e.target.files[0], e)
   }
 
-  const updloadFile=(file)=>
+  const updloadFile=(file, e)=>
   {
     if(!file) return;
-    const storageRef = ref(storage, `/files/${file.name}`)
-    const uploadTask = uploadBytesResumable(storageRef, file)
-    uploadTask.on(
-      "state_changed",
-      (snapshot)=>{
-        const progr = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
-        setProgress(progr)
-      }
-    ),
-      getDownloadURL(uploadTask.snapshot.ref)
-      .then((url)=>setImageURL(url))
+    try
+    {
+      const storageRef = ref(storage, `/files/${file.name}`)
+      const uploadTask = uploadBytesResumable(storageRef, file)
+      uploadTask.on(
+        "state_changed",
+        (snapshot)=>{
+          const progr = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
+          setProgress(progr)
+          if(progr == 100)
+          {
+            getDownloadURL(uploadTask.snapshot.ref)
+            .then((url)=>{
+              setImageURL(url)
+            })
+          }
+        }
+      )
+    }
+    catch(e)
+    {
+      console.log(e)
+    }
   }
   
   useEffect(()=>
@@ -225,7 +225,7 @@ export default function Home() {
             <input required type="text" name="description" id="description" onChange={onChangeProd}/>
 
             <p>Imagen</p>
-            <input type="file" accept='image/*' name="" id="prodImage" onChange={handleFile}/>
+            <input type="file" accept='image/*' name="" id="image" onChange={handleFile}/>
             <h3>{progress}%</h3>
             <button className='primaryButton adminButton' onClick={onSubmitProd}>Añadir Producto</button>
           </form>
