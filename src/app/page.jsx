@@ -229,7 +229,7 @@ export default function Home() {
             <p>Imagen</p>
             <input type="file" accept='image/*' name="" id="image" onChange={handleFile}/>
             <h3>{progress}%</h3>
-            <button className='primaryButton adminButton' disabled={disabled} onClick={onSubmitProd}>Añadir Producto</button>
+            <button className='primaryButton adminButton' style={{backgroundColor: disabled ? "gray": "#04BA56", cursor: disabled ? 'none' : "pointer"}} onClick={onSubmitProd}>Añadir Producto</button>
           </form>
         </div>
         <div className="column">
