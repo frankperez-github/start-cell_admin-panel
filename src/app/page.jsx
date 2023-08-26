@@ -202,7 +202,7 @@ export default function Home() {
                   <option value=""></option>
                   {clients.map((client, index)=>
                   (
-                    <option key={index} value={client.id}>{client.id}</option>
+                    <option key={index} value={client.name}>{client.name}</option>
                   ))}
                 </select>
               </div>
@@ -238,7 +238,7 @@ export default function Home() {
             <select name="" id="deleteID">
               {clients.map((client, index)=>
               (
-                <option key={index} value={client.id}>{client.id}</option>
+                <option key={index} value={client.name}>{client.name}</option>
               ))}
             </select>
             <br />
