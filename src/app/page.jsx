@@ -86,15 +86,45 @@ export default function Home() {
     location.reload()
   }
 
+  const [ID, setID] = useState(0)
   const handleDelete=async(e)=>
   {
     e.preventDefault()
-    const ID = document.getElementById("deleteID").value
+    const name = document.getElementById("deleteID").value
+    clients.map((client)=>
+    {
+      if (client.name[0] === name)
+      {
+        setID(client.id)
+      }
+    })
     const docum = doc(db, 'clients', ID)
     await deleteDoc(docum)
     .then(()=>
     {
       alert("Cliente "+ID+" eliminado")
+      location.reload()
+    })
+  }
+
+  const [prodID, setProdID] = useState(0)
+  const handleDeleteProd=async(e)=>
+  {
+    e.preventDefault()
+    const name = document.getElementById("deleteProdID").value
+    products.map((product)=>
+    {
+      if (product.title[0] === name)
+      {
+        setProdID(product.id)
+        console.log(prodID)
+      }
+    })
+    const docum = doc(db, 'products', prodID)
+    await deleteDoc(docum)
+    .then(()=>
+    {
+      alert("Producto "+prodID+" eliminado")
       location.reload()
     })
   }
@@ -243,6 +273,18 @@ export default function Home() {
             </select>
             <br />
             <button className='primaryButton adminButton' onClick={handleDelete}>Eliminar Cliente</button>
+          </form>
+
+          <h2>Eliminar Producto</h2>
+          <form action="">
+            <select name="" id="deleteProdID">
+              {products.map((product, index)=>
+              (
+                <option key={index} value={product.title}>{product.title}</option>
+              ))}
+            </select>
+            <br />
+            <button className='primaryButton adminButton' onClick={handleDeleteProd}>Eliminar Cliente</button>
           </form>
         </div>
       </div>
