@@ -143,10 +143,10 @@ export default function Home() {
 
   const handleFile=(e)=>
   {
-    updloadFile(e.target.files[0], e)
+    updloadFile(e.target.files[0])
   }
 
-  const updloadFile=(file, e)=>
+  const updloadFile=async(file)=>
   {
     if(!file) return;
     try
@@ -155,12 +155,12 @@ export default function Home() {
       const uploadTask = uploadBytesResumable(storageRef, file)
       uploadTask.on(
         "state_changed",
-        (snapshot)=>{
+        async (snapshot)=>{
           const progr = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100)
           setProgress(progr)
           if(progr == 100)
           {
-            getDownloadURL(uploadTask.snapshot.ref)
+            await getDownloadURL(uploadTask.snapshot.ref)
             .then((url)=>{
               setImageURL(url)
             })
