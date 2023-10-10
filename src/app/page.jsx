@@ -78,7 +78,7 @@ export default function Home() {
     e.preventDefault()
     newProduct.button_color = products.length%2 === 0 ? "#04BA56" : "#0495BA"
     newProduct.image = imageURL
-    console.log(newProduct)
+    console.log(id)
     const clientsRef = doc(db, 'products', id)
     await setDoc(clientsRef, newProduct)
     .then(()=>alert("Producto "+id+" agregado. Id copiado al portapapeles"))
@@ -86,16 +86,16 @@ export default function Home() {
     location.reload()
   }
 
-  const [ID, setID] = useState(0)
   const handleDelete=async(e)=>
   {
+    var ID = ""
     e.preventDefault()
     const name = document.getElementById("deleteID").value
     clients.map((client)=>
     {
       if (client.name[0] === name)
       {
-        setID(client.id)
+        ID = client.id
       }
     })
     const docum = doc(db, 'clients', ID)
@@ -107,24 +107,25 @@ export default function Home() {
     })
   }
 
-  const [prodID, setProdID] = useState(0)
+  const [prodID, setProdID] = useState("")
   const handleDeleteProd=async(e)=>
   {
+    var ID = ""
     e.preventDefault()
     const name = document.getElementById("deleteProdID").value
     products.map((product)=>
     {
       if (product.title[0] === name)
       {
-        setProdID(product.id)
-        console.log(prodID)
+        ID = product.id
+        console.log(ID+", "+product.id)
       }
     })
-    const docum = doc(db, 'products', prodID)
+    const docum = doc(db, 'products', ID)
     await deleteDoc(docum)
     .then(()=>
     {
-      alert("Producto "+prodID+" eliminado")
+      alert("Producto "+ID+" eliminado")
       location.reload()
     })
   }
